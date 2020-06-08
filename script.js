@@ -3,7 +3,6 @@ const username = parametr.substring(10);
 const url = `https://api.github.com/users/${username}`;
 const date = new Date();
 const time = 5000;
-const elem = document.getElementById('section');
 
 const getDate = new Promise ((resolve, reject) => {
   setTimeout(() => date ? resolve(date) : reject('Дата неизвестна'), time);
@@ -32,10 +31,14 @@ Promise.all([stopPr, getDate, getUrl])
 
     preloader.style.display = 'none';
 
-    elem.insertAdjacentHTML('beforeend', `<img src = '${avatar}' alt = 'photo'>`);
-    elem.insertAdjacentHTML('beforeend', `<h2>${name}</h2>`);
-    elem.insertAdjacentHTML('beforeend', `<div>${bio}</div>`);
-    elem.insertAdjacentHTML('beforeend', `<p>${date}</p>`);
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      `<section>
+      <img src = '${avatar}' alt = 'photo'>
+      <h2>${name}</h2>
+      <div>${bio}</div>
+      <p>${date}</p>
+      </section>`);
 
     const title = document.querySelector('h2');
     title.addEventListener("click", () => window.location.assign(mainLink));
